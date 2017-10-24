@@ -1,0 +1,40 @@
+{
+  "name": "total",
+  "version": "0.1.0",
+  "description": "cli tool",
+  "main": "dist/total.js",
+  "bin": "dist/total.js",
+  "scripts": {
+    "test": "npm run build && ava",
+    "dev:c:size": "find . -name '*.ts' | entr -rs 'tsc && ls *.json | node dist/total.js --size gb '",
+    "dev:c:words": "find . -name '*.ts' | entr -rs 'tsc && cat total.ts | node dist/total.js -w file'",
+    "dev:test": "find ./test -name '*.js' | entr -rs 'npm run test '",
+    "build": "tsc",
+    "deploy": "npm run test && npm publish "
+  },
+  "author": {
+    "name": "Alvaro Bernal Gimeno",
+    "email": "alvaro.bernal.gimeno@gmail.com",
+    "website": "https://alvarobg.com"
+  },
+  "engine": "8.0",
+  "license": "M.I.T",
+  "dependencies": {
+    "@types/commander": "^2.11.0",
+    "@types/node": "^8.0.25",
+    "commander": "^2.11.0",
+    "get-stdin": "^5.0.1",
+    "module-alias": "^2.0.1"
+  },
+  "devDependencies": {
+    "ava": "^0.22.0",
+    "in-between": "^5.2.0"
+	},
+	"_moduleAliases": {
+		"lib"      : "./dist/lib" 
+	},
+  "homepage": "https://github.com/alvarobernalg/total.git",
+  "bugs": {
+    "issues": "https://github.com/alvarobernalg/total/issues"
+  }
+}
