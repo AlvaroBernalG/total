@@ -35,7 +35,7 @@ test('--size', (t) => {
 			if(stderr) return reject(stderr)
 			
 
-			t.true(between(64800, 65010)(Number(stdout)))
+			t.true(between(64700, 65010)(Number(stdout)))
 			resolve()
 
 		})
