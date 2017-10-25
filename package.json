@@ -28,11 +28,12 @@
   },
   "devDependencies": {
     "ava": "^0.22.0",
-    "in-between": "^5.2.0"
-	},
-	"_moduleAliases": {
-		"lib"      : "./dist/lib" 
-	},
+    "in-between": "^5.2.0",
+    "typescript": "^2.5.3"
+  },
+  "_moduleAliases": {
+    "lib": "./dist/lib"
+  },
   "homepage": "https://github.com/alvarobernalg/total.git",
   "bugs": {
     "issues": "https://github.com/alvarobernalg/total/issues"
