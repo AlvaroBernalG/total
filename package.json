@@ -1,6 +1,6 @@
 {
   "name": "total",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "cli tool",
   "main": "dist/total.js",
   "bin": "dist/total.js",
