@@ -1,12 +1,12 @@
 import Command from "lib/command";
 import * as Commander from "commander";
-import { statsAll } from "lib/file";
+import { stats } from "lib/file";
 
 const bytes = (bytes: number) => (target: string) => {
   switch (target.toLowerCase()){
     case 'b': return bytes;
-    case 'kb': return bytes / 1000;
-    case 'mb': return bytes / 1000 / 1000;
+		case 'kb': return bytes / 1000;
+		case 'mb': return bytes / 1000 / 1000;
 		case 'gb': return bytes / 1000 / 1000 / 1000; 
 		default: return bytes;
   }
@@ -18,7 +18,7 @@ export default class Size implements Command {
 	name = 'size';
 	description = 'From a list of file paths (separated by a line break), get the total size (defaults to bytes)';
 
-	setUp(commander: Commander.CommanderStatic): void {
+	register(commander: Commander.CommanderStatic): void {
 		commander.option(this.args, this.description);
 	}
 
@@ -28,22 +28,24 @@ export default class Size implements Command {
 
 		const pretty = (args.indexOf('pretty') >= 0 || args.indexOf('p') >= 0);
 		
-		let stats;
+		let stat: string[];
 
 		try {
-			stats = await statsAll(
+
+			stat = await stats(
 				stdin
 				.split('\n')
 				.filter((f: string) => f)
 			);
+
 		} catch (error) {
 			console.log('Unable to open file: ', stdin);
 			process.exit(1);
 		}
 
-		let result = stats.reduce((prev: number, next: any) => next.size + prev, 0);
+		let result = stat.reduce((prev: number, next: any) => next.size + prev, 0);
 
-		result = size !== true ? bytes(result)(size) : result;
+		result = size !== true ? bytes(result)(size): result;
 
 		result = Number(result);
 

@@ -1,15 +1,14 @@
-const { loadAll, dir} = require('./file');
+import { load, dir } from './file';
 import Command from "lib/command";
-import * as program from "commander";
 
-export default async function load(commands_folder_path: string): Promise<Command[]> {
+export default async function loader(dirPath: string): Promise<Command[]> {
 
-	const commandPaths = await dir(commands_folder_path)
+	const commandPaths: string[] = await dir(dirPath);
 	
-	let commands = await loadAll(
-		commandPaths.map((name: any) => `${commands_folder_path}/${name}`)
-	)
+	const commands = await load(
+		commandPaths.map((fileName: string): string => `${dirPath}/${fileName}`)
+	);
 
-	return commands
+	return commands;
 }
 

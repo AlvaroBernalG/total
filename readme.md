@@ -6,23 +6,37 @@
 ## Install
 
 ``` shell
-
-$ npm install total -g
-
+npm install total -g
 ```
 
-## Usage
+# Commands
 
-Basic example
+* [size](#Size)
+
+## Size
+
+### Usage
+
+Takes a list of file paths and return the total size:
 
 ```shell
- user@computer$> find . -name '*.js' | total --size 
- 12323
+$ find . -name '*.js' | total --size 
+22969
 ```
+
+You can specify the size unit as second parameter (kb|mb|gb) 
+
+```shell
+$ find . -name '*.js' | total -s kb
+22.969
+```
+
 
 ## Contributing
 
-All contributions are welcome.
+All contributions are welcome. Please, refer to the 
+[contributing guide](https://github.com/AlvaroBernalG/total/blob/master/CONTRIBUTING.md) for
+more information on how to contribute.
 
 ## License
 MIT © [Alvaro Bernal](https://github.com/AlvaroBernalG/)

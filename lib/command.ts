@@ -5,5 +5,5 @@ export default interface Command {
  	args: string
  	name: string
 	onRun: (stdin: string, commander: Commander.CommanderStatic)=> Promise<string>
-	setUp: (commander: Commander.CommanderStatic)=> void
+	register: (commander: Commander.CommanderStatic)=> void
 }
