@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 require('module-alias/register');
 import * as path from 'path';
 const pck = require(path.join(__dirname, '../package.json'));
