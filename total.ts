@@ -3,9 +3,9 @@
 require('module-alias/register');
 import * as path from 'path';
 const pck = require(path.join(__dirname, '../package.json'));
-import Command from "lib/command";
-import load from "lib/loader";
-import * as program from "commander";
+import Command from 'lib/command';
+import load from 'lib/loader';
+import * as program from 'commander';
 const getStdin = require('get-stdin');
 
 (async () => {
@@ -25,23 +25,23 @@ const getStdin = require('get-stdin');
 				.map((command: Command): Promise<string> => command.onRun(stdin, program))
 		);
 
-	}catch (error) {
+	} catch (error) {
 		console.log('Error while processing the commands.', error);
 		process.exit(1);
 	}
-	
+
 	output.forEach((out: string): void => out && console.log(out));
 
-})()
+})();
 
 function config(commands: any[]): Command[] {
-	
+
 	commands = commands.map((Command: any): Command => {
 		const command: Command = new Command();
 		command.register(program);
 		return command;
 	});
-	
+
 	program
 		.version(pck.version)
 		.parse(process.argv);

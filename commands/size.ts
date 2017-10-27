@@ -1,16 +1,17 @@
-import Command from "lib/command";
-import * as Commander from "commander";
-import { stats } from "lib/file";
+import Command from 'lib/command';
+import * as Commander from 'commander';
+import { stats } from 'lib/file';
 
 const bytes = (bytes: number) => (target: string) => {
-  switch (target.toLowerCase()){
-    case 'b': return bytes;
+
+	switch (target.toLowerCase()) {
+		case 'b': return bytes;
 		case 'kb': return bytes / 1000;
 		case 'mb': return bytes / 1000 / 1000;
-		case 'gb': return bytes / 1000 / 1000 / 1000; 
+		case 'gb': return bytes / 1000 / 1000 / 1000;
 		default: return bytes;
-  }
-}
+	}
+};
 
 export default class Size implements Command {
 
@@ -27,15 +28,15 @@ export default class Size implements Command {
 		const { args, size } = commander;
 
 		const pretty = (args.indexOf('pretty') >= 0 || args.indexOf('p') >= 0);
-		
+
 		let stat: string[];
 
 		try {
 
 			stat = await stats(
 				stdin
-				.split('\n')
-				.filter((f: string) => f)
+					.split('\n')
+					.filter((f: string) => f)
 			);
 
 		} catch (error) {
@@ -45,10 +46,11 @@ export default class Size implements Command {
 
 		let result = stat.reduce((prev: number, next: any) => next.size + prev, 0);
 
-		result = size !== true ? bytes(result)(size): result;
+		result = size !== true ? bytes(result)(size) : result;
 
 		result = Number(result);
 
-		return pretty ? `Size --> ${result} ${size === true ? 'bytes': size}`: result;
+		return pretty ? `Size --> ${result} ${size === true ? 'bytes' : size}` : result;
 	}
-} 
+}
+
