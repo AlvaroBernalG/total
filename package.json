@@ -5,12 +5,13 @@
   "main": "dist/total.js",
   "bin": "dist/total.js",
   "scripts": {
-    "test": "npm run build && jest",
+    "test": "npm run build && npm run tslint && jest",
     "dev:c:size": "find . -name '*.ts' | entr -rs 'tsc && ls *.json | node dist/total.js --size mb'",
     "dev:c:word": "find . -name '*.ts' | entr -rs 'tsc && cat total.ts | node dist/total.js -w file'",
     "dev:test": "find . -name '*.ts' | entr -rs 'npm run test '",
     "build": "tsc",
-    "deploy": "npm run test && npm publish "
+		"tslint": "tslint -c tslint.json -p tsconfig.json",
+    "deploy": "npm run tslint && npm run test && npm publish"
   },
   "author": {
     "name": "Alvaro Bernal Gimeno",
@@ -23,8 +24,8 @@
     "commander": "^2.11.0",
     "get-stdin": "^5.0.1",
     "module-alias": "^2.0.1"
-	},
-	"jest": {
+  },
+  "jest": {
     "moduleFileExtensions": [
       "ts",
       "js"
@@ -45,6 +46,7 @@
     "in-between": "^5.2.0",
     "jest": "^21.2.1",
     "ts-jest": "^21.1.4",
+    "tslint": "^5.8.0",
     "typescript": "^2.5.3"
   },
   "_moduleAliases": {
