@@ -1,6 +1,5 @@
 # total
-> Work in progress.
-
+> Work in progress.  
 [![Build Status](https://travis-ci.org/AlvaroBernalG/total.svg?branch=master)](https://travis-ci.org/AlvaroBernalG/total) [![npm version](https://badge.fury.io/js/total.svg)](https://badge.fury.io/js/total) 
 
 ## Install
@@ -66,9 +65,7 @@ $ total --tp w < text.txt
 
 ## Contributing
 
-All contributions are welcome. Please, refer to the 
-[contributing guide](https://github.com/AlvaroBernalG/total/blob/master/CONTRIBUTING.md) for
-more information on how to contribute.
+All contributions are welcome.
 
 ## License
 MIT © [Alvaro Bernal](https://github.com/AlvaroBernalG/)
