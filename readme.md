@@ -9,11 +9,13 @@
 npm install total -g
 ```
 
-# Commands
+# List of commands
 
 * [size](#Size)
+* [tp](#tp)
 
-## Size
+## * size
+File/Directory size.
 
 ### Usage
 
@@ -31,6 +33,36 @@ $ find . -name '*.js' | total -s kb
 22.969
 ```
 
+ ## * tp
+Text processor.
+
+### Usage
+
+Returns the number of characters
+```shell
+$ echo 'hello\nworld' | total --tp 
+13
+```
+
+Returns the length of the longest line
+```shell
+$ echo 'hello\nworld' |  total --tp L
+5
+```
+
+Returns the number of lines
+```shell
+$ echo 'hello\nworld' |  total --tp l
+2
+```
+
+Returns the number of words
+```shell
+$ cat text.txt
+hello world
+$ total --tp w < text.txt
+2
+```
 
 ## Contributing
 
