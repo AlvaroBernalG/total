@@ -1,6 +1,6 @@
+import { stats } from 'lib/file';
 import Command from 'lib/command';
 import * as Commander from 'commander';
-import { stats } from 'lib/file';
 
 const bytes = (bytes: number) => (target: string) => {
 
@@ -27,8 +27,6 @@ export default class Size implements Command {
 
 		const { args, size } = commander;
 
-		const pretty = (args.indexOf('pretty') >= 0 || args.indexOf('p') >= 0);
-
 		let stat: string[];
 
 		try {
@@ -50,7 +48,7 @@ export default class Size implements Command {
 
 		result = Number(result);
 
-		return pretty ? `Size --> ${result} ${size === true ? 'bytes' : size}` : result;
+		return result;
 	}
 }
 
