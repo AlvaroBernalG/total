@@ -1,19 +1,26 @@
 # total
+
 > Work in progress.  
-[![Build Status](https://travis-ci.org/AlvaroBernalG/total.svg?branch=master)](https://travis-ci.org/AlvaroBernalG/total) [![npm version](https://badge.fury.io/js/total.svg)](https://badge.fury.io/js/total) 
+> [![Build Status](https://travis-ci.org/AlvaroBernalG/total.svg?branch=master)](https://travis-ci.org/AlvaroBernalG/total) [![npm version](https://badge.fury.io/js/total.svg)](https://badge.fury.io/js/total)
 
 ## Install
 
-``` shell
-npm install total -g 
+```shell
+npm install total -g
 ```
+
+# Disclaimer
+
+This project is highly experimental and under development.
 
 # List of commands
 
-* [size](#Size)
+* [size](#size)
 * [tp](#tp)
+* [eval](#eval)
 
 ## size
+
 File size.
 
 ### Usage
@@ -21,46 +28,62 @@ File size.
 [ ] Takes a list of file paths and return the total size:
 
 ```shell
-$ find . -name '*.js' | total --size 
+$ find . -name '*.js' | total size
 22969
 ```
 
-[kb|mb|gb] Transform the result in the specified size unit. 
+[kb|mb|gb] Transform the result in the specified size unit.
 
 ```shell
-$ find . -name '*.js' | total -s kb
+$ find . -name '*.js' | total size -u mb
 22.969
 ```
 
- ## tp
+## tp
+
 Text processor.
 
 ### Usage
 
 [ ] Returns the number of characters
+
 ```shell
-$ echo 'hello\nworld' | total --tp 
+$ echo 'hello\nworld' | total tp
 13
 ```
 
 [L] Returns the length of the longest line
+
 ```shell
-$ echo 'hello\nworld' |  total --tp L
+$ echo 'hello\nworld' |  total tp -L
 5
 ```
 
 [l] Returns the number of lines
+
 ```shell
-$ echo 'hello\nworld' |  total --tp l
+$ echo 'hello\nworld' |  total tp -l
 2
 ```
 
 [w] Returns the number of words
+
 ```shell
 $ cat text.txt
 hello world
-$ total --tp w < text.txt
+$ total tp -w < text.txt
 2
+```
+
+## Eval
+
+Evaluates stdin in a javascript environment.
+
+### Usage
+
+```shell
+$ echo 'hello' | total eval -f 'stidn => stdin + " world"'
+hello world
 ```
 
 ## Contributing
@@ -68,4 +91,5 @@ $ total --tp w < text.txt
 All contributions are welcome.
 
 ## License
+
 MIT © [Alvaro Bernal](https://github.com/AlvaroBernalG/)

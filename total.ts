@@ -1,50 +1,50 @@
 #!/usr/bin/env node
 
 require('module-alias/register');
+const getStdin = require('get-stdin');
 import * as path from 'path';
 const pck = require(path.join(__dirname, '../package.json'));
-import Command from 'lib/command';
-import load from 'lib/loader';
+import { Command, CommandConfig, loadCommands, CommandArgs } from 'lib/command';
 import * as program from 'commander';
-const getStdin = require('get-stdin');
 
 (async () => {
+	const [stdin, commands] = await Promise.all([getStdin(), loadCommands()]);
 
-	const [stdin, commands] = await Promise.all([
-		getStdin(),
-		load('./commands').then(config)
-	]);
+	commands.forEach((Command: any) => {
+		const cmd: Command = new Command();
 
-	let output: string[];
+		const config: CommandConfig = cmd.register();
 
-	try {
-
-		output = await Promise.all<string>(
-			commands
-				.filter((command: Command): Command => program[command.name.toLowerCase()])
-				.map((command: Command): Promise<string> => command.onRun(stdin, program))
-		);
-
-	} catch (error) {
-		console.log('Error while processing the commands.', error);
-		process.exit(1);
-	}
-
-	output.forEach((out: string): void => out && console.log(out));
-
-})();
-
-function config(commands: any[]): Command[] {
-
-	commands = commands.map((Command: any): Command => {
-		const command: Command = new Command();
-		command.register(program);
-		return command;
+		registerCommand(cmd, config, stdin);
 	});
 
-	program
-		.version(pck.version)
-		.parse(process.argv);
+	program.version(pck.version).parse(process.argv);
+})();
 
-	return commands;
+function registerCommand(
+	command: Command,
+	config: CommandConfig,
+	stdin: string
+) {
+	const programState = program
+		.command(config.name)
+		.description(config.description);
+
+	for (const option of config.options) {
+		programState.option(option.flags, option.description);
+	}
+
+	programState.action((commander: any) => {
+		const argsPassed: CommandArgs[] = config.options
+			.filter((op: CommandArgs) => commander[op.name])
+			.map((op: CommandArgs) => ({
+				...op,
+				['value']: commander[op.name],
+			}));
+
+		command
+			.onRun(stdin, argsPassed)
+			.catch(err => console.log(err.message))
+			.then(console.log);
+	});
 }
