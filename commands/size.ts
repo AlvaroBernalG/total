@@ -15,9 +15,9 @@ const bytes = (bytes: number) => (target: string) => {
 
 export default class Size implements Command {
 
-	args = '-s --size [unit]';
+	args = '-s --size [b|kb|mb|gb]';
 	name = 'size';
-	description = 'From a list of file paths (separated by a line break), get the total size (defaults to bytes)';
+	description = 'Size. From a list of file paths (separated by a line break), get the total size (defaults to bytes)';
 
 	register(commander: Commander.CommanderStatic): void {
 		commander.option(this.args, this.description);
