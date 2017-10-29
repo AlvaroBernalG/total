@@ -1,6 +1,6 @@
 {
   "name": "total",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Expansible cli that computes the stdin",
   "main": "dist/total.js",
   "bin": "dist/total.js",

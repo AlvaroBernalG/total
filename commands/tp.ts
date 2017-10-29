@@ -33,7 +33,6 @@ export default class Tp extends TextProcessor implements Command {
 	name = 'tp';
 	description = 'Text Processor. [L] Length of the longest line. [l] Number of Lines. [w] Number of words. [c] Number of characters.';
 	args = '--tp [l|L|w|c]';
-	stdin = '';
 
 	register(commander: Commander.CommanderStatic): void {
 		commander.option(this.args, this.description);

@@ -5,7 +5,7 @@
 ## Install
 
 ``` shell
-npm install total -g
+npm install total -g 
 ```
 
 # List of commands
@@ -13,49 +13,49 @@ npm install total -g
 * [size](#Size)
 * [tp](#tp)
 
-## * size
-File/Directory size.
+## size
+File size.
 
 ### Usage
 
-Takes a list of file paths and return the total size:
+[ ] Takes a list of file paths and return the total size:
 
 ```shell
 $ find . -name '*.js' | total --size 
 22969
 ```
 
-You can specify the size unit as second parameter (kb|mb|gb) 
+[kb|mb|gb] Transform the result in the specified size unit. 
 
 ```shell
 $ find . -name '*.js' | total -s kb
 22.969
 ```
 
- ## * tp
+ ## tp
 Text processor.
 
 ### Usage
 
-Returns the number of characters
+[ ] Returns the number of characters
 ```shell
 $ echo 'hello\nworld' | total --tp 
 13
 ```
 
-Returns the length of the longest line
+[L] Returns the length of the longest line
 ```shell
 $ echo 'hello\nworld' |  total --tp L
 5
 ```
 
-Returns the number of lines
+[l] Returns the number of lines
 ```shell
 $ echo 'hello\nworld' |  total --tp l
 2
 ```
 
-Returns the number of words
+[w] Returns the number of words
 ```shell
 $ cat text.txt
 hello world

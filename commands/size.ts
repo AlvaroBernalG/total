@@ -17,7 +17,7 @@ export default class Size implements Command {
 
 	args = '-s --size [b|kb|mb|gb]';
 	name = 'size';
-	description = 'Size. From a list of file paths (separated by a line break), get the total size (defaults to bytes)';
+	description = 'File size. From a list of file paths (separated by a line break), get the total size (defaults to bytes)';
 
 	register(commander: Commander.CommanderStatic): void {
 		commander.option(this.args, this.description);
