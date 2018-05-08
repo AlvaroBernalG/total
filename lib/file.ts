@@ -1,3 +1,4 @@
+const _glob = require('glob');
 import * as fs from 'fs';
 import * as util from 'util';
 import * as path from 'path';
@@ -31,6 +32,16 @@ const _stat = (path: string): Promise<any> =>
 			resolve(result);
 		});
 	});
+
+export const glob = (path: string): Promise<string[]> => {
+	return new Promise((resolve, reject) => {
+		_glob(path, {}, (err: any, files: string[]) => {
+			if (err) reject(err);
+
+			resolve(files);
+		});
+	});
+};
 
 export const dir = _normalizePath(async (path: string, fullPath = false) => {
 	const files = fs.readdirSync(path);

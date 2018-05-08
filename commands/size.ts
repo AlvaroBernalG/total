@@ -1,6 +1,5 @@
-const folderSize = require('get-folder-size');
 import { FileNotFound, PathNotFound } from 'lib/error';
-import { stats } from 'lib/file';
+import { stats, glob } from 'lib/file';
 import {
 	Command,
 	CommandArgs,
@@ -16,15 +15,6 @@ export const enum Unit {
 	Gigabyte = 'gb',
 }
 
-const getFolderSize = (path: string, ignoreRegx?: any): Promise<number> =>
-	new Promise((resolve: any, reject: any) => {
-		folderSize(path, ignoreRegx, (err: any, size: number) => {
-			if (err) return reject(size);
-
-			resolve(size);
-		});
-	});
-
 const bytes = (bytes: number) => (target: Unit) => {
 	switch (target) {
 		case Unit.Byte:
@@ -39,20 +29,6 @@ const bytes = (bytes: number) => (target: Unit) => {
 			return bytes;
 	}
 };
-
-async function getPathSize(path: string, ignore?: string): Promise<number> {
-	const ignoreRegex = ignore ? new RegExp(ignore) : ignore;
-
-	let dirSize: number = 0;
-
-	try {
-		dirSize = await getFolderSize(path, ignoreRegex);
-	} catch (error) {
-		throw new PathNotFound(path);
-	}
-
-	return dirSize;
-}
 
 async function getSize(stdin: string): Promise<number> {
 	let stat: string[];
@@ -76,7 +52,8 @@ export default class Size implements Command {
 		const config: CommandConfig = {
 			name: 'size',
 			description:
-				'File size. From a list of file paths (separated by a line break), get the total size (defaults to bytes)',
+				'File size. From a list of file paths (separated by a line break), get' +
+				'the total size (defaults to bytes)',
 			options: [
 				{
 					name: 'path',
@@ -101,7 +78,16 @@ export default class Size implements Command {
 		if (hasArgs('path', args)) {
 			const path: CommandArgs = getArg('path', args);
 			const ignore: CommandArgs = getArg('ignore', args);
-			const dirSize = await getPathSize(path.value, ignore.value);
+
+			const files = await glob(path.value);
+
+			const allFiles = await Promise.all(files.map(getSize));
+
+			const dirSize = allFiles.reduce(
+				(prev: number, next: number) => prev + next,
+				0
+			);
+
 			totalSize = totalSize + dirSize;
 		}
 

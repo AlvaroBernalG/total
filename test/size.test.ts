@@ -10,7 +10,6 @@ test('-u kb', () => {
 				if (err) return reject(err);
 				if (stderr) return reject(stderr);
 
-				console.log('stdout: => ', stdout);
 				expect(between(64.0, 65.81)(Number(stdout))).toBe(true);
 				resolve();
 			}
@@ -36,12 +35,12 @@ test('size --unit b', () => {
 test('size --path ', () => {
 	return new Promise((resolve: any, reject: any) => {
 		exec(
-			'find test/data | node ./dist/cli.js size -p "./test/data"',
+			'find test/data | node ./dist/cli.js size -p "./test/data/**.txt"',
 			(err: any, stdout: any, stderr: any) => {
 				if (err) return reject(err);
 				if (stderr) return reject(stderr);
 
-				expect(between(64700 * 2, 65010 * 2)(Number(stdout))).toBe(true);
+				expect(between(63700 * 2, 66010 * 2)(Number(stdout))).toBe(true);
 				resolve();
 			}
 		);

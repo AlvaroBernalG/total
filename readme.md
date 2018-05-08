@@ -1,6 +1,5 @@
 # total
 
-> Work in progress.  
 > [![Build Status](https://travis-ci.org/AlvaroBernalG/total.svg?branch=master)](https://travis-ci.org/AlvaroBernalG/total) [![npm version](https://badge.fury.io/js/total.svg)](https://badge.fury.io/js/total)
 
 ## Install
@@ -39,6 +38,13 @@ $ find . -name '*.js' | total size -u mb
 22.969
 ```
 
+`-p` Additional path lookup with patterns.
+
+```shell
+$ ls '*.js' | total size -p "./node_modules/**/*.ts"
+6666666666666666666666666666
+```
+
 ## tp
 
 Text processor.
@@ -52,21 +58,21 @@ $ echo 'hello\nworld' | total tp
 13
 ```
 
-[L] Returns the length of the longest line
+`-L` Returns the length of the longest line
 
 ```shell
 $ echo 'hello\nworld' |  total tp -L
 5
 ```
 
-[l] Returns the number of lines
+`-l` Returns the number of lines
 
 ```shell
 $ echo 'hello\nworld' |  total tp -l
 2
 ```
 
-[w] Returns the number of words
+`-w` Returns the number of words
 
 ```shell
 $ cat text.txt
