@@ -1,14 +1,17 @@
 {
 	"name": "total",
-	"version": "0.1.6",
+	"version": "0.2.0",
 	"description": "Expansible cli that computes the stdin",
 	"main": "dist/total.js",
 	"bin": "dist/total.js",
 	"scripts": {
 		"test": "npm run build && npm run tslint && jest",
-		"dev:c:size": "find . -name '*.ts' | entr -rs 'tsc && ls *.json | node dist/total.js --size mb'",
-		"dev:c:tp": "find . -name '*.ts' | entr -rs 'tsc && echo \"hello\nworld\" | node dist/total.js --tp '",
-		"dev:c:eval": "find . -name '*.ts' | entr -rs 'tsc && echo \"hello\nworld\"  | node dist/total.js --eval \"(s) => s\"'",
+		"dev:c:size":
+			"find . -name '*.ts' | entr -rs 'tsc && ls *.json | node dist/total.js --size mb'",
+		"dev:c:tp":
+			"find . -name '*.ts' | entr -rs 'tsc && echo \"hello\nworld\" | node dist/total.js --tp '",
+		"dev:c:eval":
+			"find . -name '*.ts' | entr -rs 'tsc && echo \"hello\nworld\"  | node dist/total.js --eval \"(s) => s\"'",
 		"dev:test": "find . -name '*.ts' | entr -rs 'npm run test '",
 		"build": "npm run clean && tsc",
 		"clean": "rm -rf ./dist",
@@ -29,16 +32,11 @@
 		"module-alias": "^2.0.1"
 	},
 	"jest": {
-		"moduleFileExtensions": [
-			"ts",
-			"js"
-		],
+		"moduleFileExtensions": ["ts", "js"],
 		"transform": {
 			"^.+\\.(ts|tsx)$": "./node_modules/ts-jest/preprocessor.js"
 		},
-		"testMatch": [
-			"**/test/**/*.test.(ts|js)"
-		],
+		"testMatch": ["**/test/**/*.test.(ts|js)"],
 		"testEnvironment": "node"
 	},
 	"devDependencies": {
