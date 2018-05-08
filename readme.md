@@ -75,7 +75,7 @@ $ total tp -w < text.txt
 2
 ```
 
-## Eval
+## eval
 
 Evaluates stdin in a javascript environment.
 

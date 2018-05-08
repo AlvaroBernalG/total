@@ -2,16 +2,16 @@
 	"name": "total",
 	"version": "0.2.0",
 	"description": "Expansible cli that computes the stdin",
-	"main": "dist/total.js",
-	"bin": "dist/total.js",
+	"main": "dist/cli.js",
+	"bin": "dist/cli.js",
 	"scripts": {
 		"test": "npm run build && npm run tslint && jest",
 		"dev:c:size":
-			"find . -name '*.ts' | entr -rs 'tsc && ls *.json | node dist/total.js --size mb'",
+			"find . -name '*.ts' | entr -rs 'tsc && ls *.json | node dist/cli.js --size mb'",
 		"dev:c:tp":
-			"find . -name '*.ts' | entr -rs 'tsc && echo \"hello\nworld\" | node dist/total.js --tp '",
+			"find . -name '*.ts' | entr -rs 'tsc && echo \"hello\nworld\" | node dist/cli.js --tp '",
 		"dev:c:eval":
-			"find . -name '*.ts' | entr -rs 'tsc && echo \"hello\nworld\"  | node dist/total.js --eval \"(s) => s\"'",
+			"find . -name '*.ts' | entr -rs 'tsc && echo \"hello\nworld\"  | node dist/cli.js --eval \"(s) => s\"'",
 		"dev:test": "find . -name '*.ts' | entr -rs 'npm run test '",
 		"build": "npm run clean && tsc",
 		"clean": "rm -rf ./dist",

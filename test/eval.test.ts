@@ -5,7 +5,7 @@ describe('eval', () => {
 	test('eval -f. Evaluates stdin in a function.', () => {
 		return new Promise((resolve: any, reject: any) => {
 			exec(
-				'echo "hello" | node ./dist/total.js eval -f "std => stdin + \' world\'"',
+				'echo "hello" | node ./dist/cli.js eval -f "std => stdin + \' world\'"',
 				(err: any, stdout: string, stderr: any) => {
 					if (err) return reject(err);
 					if (stderr) return reject(stderr);
