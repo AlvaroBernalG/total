@@ -3,6 +3,6 @@ import { CommandArgs } from './args';
 import { CommandConfig } from './config';
 
 export interface Command {
-	register: () => CommandConfig;
+	config: () => CommandConfig;
 	onRun: (stdin: string, args: CommandArgs[]) => Promise<string>;
 }

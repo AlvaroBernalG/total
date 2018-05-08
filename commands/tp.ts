@@ -34,7 +34,7 @@ export class TextProcessor {
 }
 
 export default class Tp extends TextProcessor implements Command {
-	register(): CommandConfig {
+	config(): CommandConfig {
 		const config: CommandConfig = {
 			name: 'tp',
 			description:

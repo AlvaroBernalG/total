@@ -10,22 +10,15 @@ import * as program from 'commander';
 (async () => {
 	const [stdin, commands] = await Promise.all([getStdin(), loadCommands()]);
 
-	commands.forEach((Command: any) => {
-		const cmd: Command = new Command();
-
-		const config: CommandConfig = cmd.register();
-
-		registerCommand(cmd, config, stdin);
-	});
+	commands.forEach(registerCommand.bind(this, stdin));
 
 	program.version(pck.version).parse(process.argv);
 })();
 
-function registerCommand(
-	command: Command,
-	config: CommandConfig,
-	stdin: string
-) {
+function registerCommand(stdin: string, Command: any) {
+	const command: Command = new Command();
+	const config: CommandConfig = command.config();
+
 	const programState = program
 		.command(config.name)
 		.description(config.description);
@@ -44,7 +37,7 @@ function registerCommand(
 
 		command
 			.onRun(stdin, argsPassed)
-			.catch(err => console.log(err.message))
+			.catch((err: Error) => console.log(err.message))
 			.then(console.log);
 	});
 }

@@ -72,7 +72,7 @@ async function getSize(stdin: string): Promise<number> {
 }
 
 export default class Size implements Command {
-	register(): CommandConfig {
+	config(): CommandConfig {
 		const config: CommandConfig = {
 			name: 'size',
 			description:

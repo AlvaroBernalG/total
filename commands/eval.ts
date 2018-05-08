@@ -10,7 +10,7 @@ import { InvalidArguments } from 'lib/error';
 const lines = (str: string): string[] => str.split('\n');
 
 export default class Eval implements Command {
-	register(): CommandConfig {
+	config(): CommandConfig {
 		const config: CommandConfig = {
 			name: 'eval',
 			description: 'Evaluates the stdin in a javascript environment.',
