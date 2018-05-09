@@ -60,11 +60,6 @@ export default class Size implements Command {
 					flags: '-p, --path [path]',
 					description: 'directory/file path.',
 				},
-				{
-					name: 'ignore',
-					flags: '-i, --ignore [ignore]',
-					description: 'directory to ignore.',
-				},
 				{ name: 'unit', flags: '-u, --unit [unit]', description: 'Unit size.' },
 			],
 		};
@@ -77,7 +72,6 @@ export default class Size implements Command {
 
 		if (hasArgs('path', args)) {
 			const path: CommandArgs = getArg('path', args);
-			const ignore: CommandArgs = getArg('ignore', args);
 
 			const files = await glob(path.value);
 

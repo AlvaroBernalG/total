@@ -31,14 +31,14 @@ $ find . -name '*.js' | total size
 22969
 ```
 
-[kb|mb|gb] Transform the result in the specified size unit.
+`-u [kb|mb|gb]` Transform the result in the specified size unit.
 
 ```shell
 $ find . -name '*.js' | total size -u mb
 22.969
 ```
 
-`-p` Additional path lookup with patterns.
+`-p` Additional path lookup using glob patterns.
 
 ```shell
 $ ls '*.js' | total size -p "./node_modules/**/*.ts"
