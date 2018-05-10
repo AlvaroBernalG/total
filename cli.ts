@@ -38,6 +38,9 @@ function registerCommand(stdin: string, Command: any) {
 		command
 			.onRun(stdin, argsPassed)
 			.catch((err: Error) => console.log(err.message))
-			.then(console.log);
+			.then(
+				(result: string) =>
+					result !== undefined ? console.log(result) : programState.help()
+			);
 	});
 }
