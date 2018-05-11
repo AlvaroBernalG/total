@@ -9,9 +9,7 @@ import * as program from 'commander';
 
 (async () => {
 	const [stdin, commands] = await Promise.all([getStdin(), loadCommands()]);
-
 	commands.forEach(registerCommand.bind(this, stdin));
-
 	program.version(pck.version).parse(process.argv);
 })();
 

@@ -13,10 +13,6 @@ const _getBodyFileName = (filename: string): string => {
 	return filename.match(/^(.*?)\.[A-z]{1,2}$/)[1];
 };
 
-const _stats = util.promisify(fs.stat);
-
-const _read = util.promisify(fs.readFile);
-
 const _appendPath = (path: string, fileName: string): string =>
 	`${path}/${fileName}`;
 
@@ -24,14 +20,6 @@ const _load = _normalizePath(async (path: string) => {
 	const file = await import(path);
 	return file.default;
 });
-
-const _stat = (path: string): Promise<any> =>
-	new Promise((resolve, reject) => {
-		fs.stat(path, (error: any, result: any) => {
-			if (error) return reject(error);
-			resolve(result);
-		});
-	});
 
 export const glob = (path: string): Promise<string[]> => {
 	return new Promise((resolve, reject) => {
@@ -48,7 +36,7 @@ export const dir = _normalizePath(async (path: string, fullPath = false) => {
 	return fullPath ? files.map(_appendPath.bind(undefined, path)) : files;
 });
 
-export const load = async (paths: string | string[]): Promise<any[]> => {
+export const load = async (paths: string | string[]): Promise<fs.Stats[]> => {
 	if (Array.isArray(paths))
 		return Promise.all(
 			paths.map((name: string) => {
@@ -60,16 +48,16 @@ export const load = async (paths: string | string[]): Promise<any[]> => {
 	return _load(paths);
 };
 
-export const read = async (paths: string | string[]): Promise<any[]> => {
-	if (Array.isArray(paths))
-		return Promise.all(paths.map((fileName: string) => _read(fileName)));
+const _stat = (path: string): Promise<fs.Stats> =>
+	new Promise((resolve, reject) => {
+		fs.stat(path, (error: any, result: any) => {
+			if (error) return reject(error);
+			resolve(result);
+		});
+	});
 
-	return [_read(paths)];
-};
-
-export const stats = async (path: string | string[]): Promise<any[]> => {
-	if (Array.isArray(path))
-		return Promise.all(path.map((filePath: string) => _stat(filePath)));
-
-	return [_stat(path)];
+export const stats = async (path: string | string[]): Promise<fs.Stats[]> => {
+	return Array.isArray(path)
+		? Promise.all(path.map(_stat))
+		: [await _stat(path)];
 };

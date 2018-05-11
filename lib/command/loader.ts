@@ -1,3 +1,4 @@
+import * as fs from 'fs';
 import { load, dir } from 'lib/file';
 import { Command } from './command';
 
@@ -5,7 +6,7 @@ const COMMANDS_PATH = './commands';
 
 export async function loadCommands(
 	dirPath = COMMANDS_PATH
-): Promise<Command[]> {
+): Promise<fs.Stats[]> {
 	const commandPaths: string[] = await dir(dirPath);
 
 	const commands = await load(

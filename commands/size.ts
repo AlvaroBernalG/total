@@ -1,3 +1,4 @@
+import * as fs from 'fs';
 import { FileNotFound, PathNotFound } from 'lib/error';
 import { stats, glob } from 'lib/file';
 import {
@@ -31,7 +32,7 @@ const bytes = (bytes: number) => (target: Unit) => {
 };
 
 async function getSize(stdin: string): Promise<number> {
-	let stat: string[];
+	let stat: fs.Stats[];
 
 	try {
 		stat = await stats(stdin.split('\n').filter((path: string) => path));
